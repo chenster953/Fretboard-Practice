@@ -46,13 +46,15 @@ all.addEventListener('click', ()=> {
 });
 
 // controls
+quit.disabled = true;
 single.addEventListener('click', ()=> {
+  quit.disabled = false;
   const time = (60000 / parseInt(bpm.value)) / 11;
   const startInteval = setInterval(() => {
     note.innerHTML = queue[Math.floor(Math.random() * queue.length)];
     resetBars();
   }, 60000 / parseInt(bpm.value));
-  setInterval(() => {
+  const barsInterval = setInterval(() => {
     setTimeout(() => {
       leftbar.style.opacity = 0;
       leftbar.style.transition = '.2s'
@@ -95,15 +97,70 @@ single.addEventListener('click', ()=> {
     }, time * 10);
   }, 60000 / parseInt(bpm.value));
   quit.addEventListener('click', ()=> {
+    quit.disabled = true;
     clearInterval(startInteval);
+    clearInterval(barsInterval);
+    resetBars();
   })
 })
 allStrings.addEventListener('click', ()=> {
-  
+  quit.disabled = false;
+  const time = (60000 / parseInt(bpm.value)) / 11;
+  const startInteval = setInterval(() => {
+      note.innerHTML = queue[Math.floor(Math.random() * queue.length)];
+      resetBars();
+  }, 60000 / parseInt(bpm.value));
+  const barsInterval = setInterval(() => {
+    setTimeout(() => {
+      leftbar.style.opacity = 0;
+      leftbar.style.transition = '.2s'
+    }, time);
+    setTimeout(() => {
+      a.style.opacity = 0;
+      a.style.transition = '.2s'
+    }, time * 2);
+    setTimeout(() => {
+      b.style.opacity = 0;
+      b.style.transition = '.2s'
+    }, time * 3);
+    setTimeout(() => {
+      c.style.opacity = 0;
+      c.style.transition = '.2s'
+    }, time * 4);
+    setTimeout(() => {
+      d.style.opacity = 0;
+      d.style.transition = '.2s'
+    }, time * 5);
+    setTimeout(() => {
+      e.style.opacity = 0;
+      d.style.transition = '.2s'
+    }, time * 6);
+    setTimeout(() => {
+      f.style.opacity = 0;
+      f.style.transition = '.2s'
+    }, time * 7);
+    setTimeout(() => {
+      g.style.opacity = 0;
+      g.style.transition = '.2s'
+    }, time * 8);
+    setTimeout(() => {
+      h.style.opacity = 0;
+      h.style.transition = '.2s'
+    }, time * 9);
+    setTimeout(() => {
+      rightbar.style.opacity = 0;
+      rightbar.style.transition = '.2s'
+    }, time * 10);
+  }, 60000 / parseInt(bpm.value));
+  quit.addEventListener('click', ()=> {
+    quit.disabled = true;
+    clearInterval(startInteval);
+    clearInterval(barsInterval);
+    resetBars();
+  })
 })
-
-
 function resetBars() {
+  setTimeout(() => {
   leftbar.style.opacity = 1;
   a.style.opacity = 1;
   b.style.opacity = 1;
@@ -114,4 +171,6 @@ function resetBars() {
   g.style.opacity = 1;
   h.style.opacity = 1;
   rightbar.style.opacity = 1;
+  }, 60000 / bpm.value);
+
 }
