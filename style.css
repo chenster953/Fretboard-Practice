@@ -7,8 +7,9 @@
 body {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  height: 60rem
 }
 
 .options {
@@ -70,5 +71,15 @@ body {
   position: relative;
   top: 8rem;
   font-size: 10rem;
+}
+
+.fretboardimage {
+  width: 50rem;
+  position: relative;
+  top: 5rem;
+}
+
+.hidden.fretboardimage {
+  visibility: hidden;
 }
 

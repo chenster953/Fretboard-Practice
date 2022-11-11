@@ -14,6 +14,8 @@ const single = document.querySelector('.single');
 const allStrings = document.querySelector('.allstrings');
 const quit = document.querySelector('.quit');
 const note = document.querySelector('.note');
+const show = document.querySelector('.show');
+const fretboardimage = document.querySelector('.fretboardimage');
 
 // countdown bars
 const leftbar = document.querySelector('.leftbar');
@@ -102,14 +104,16 @@ single.addEventListener('click', ()=> {
     clearInterval(barsInterval);
     resetBars();
   })
-})
+});
 allStrings.addEventListener('click', ()=> {
   quit.disabled = false;
   const time = (60000 / parseInt(bpm.value)) / 11;
   const startInteval = setInterval(() => {
-      note.innerHTML = queue[Math.floor(Math.random() * queue.length)];
       resetBars();
   }, 60000 / parseInt(bpm.value));
+  const htmlInterval = setInterval(() => {
+    note.innerHTML = queue[Math.floor(Math.random() * queue.length)];
+  }, (60000 / parseInt(bpm.value)) * 6);
   const barsInterval = setInterval(() => {
     setTimeout(() => {
       leftbar.style.opacity = 0;
@@ -156,8 +160,21 @@ allStrings.addEventListener('click', ()=> {
     quit.disabled = true;
     clearInterval(startInteval);
     clearInterval(barsInterval);
+    clearInterval(htmlInterval);
     resetBars();
   })
+});
+let shown = false;
+show.addEventListener('click', ()=> {
+  if (shown) {
+    fretboardimage.classList.add('hidden');
+    show.innerHTML = 'Show Fretboard';
+    shown = false
+  } else {
+    fretboardimage.classList.remove('hidden');
+    show.innerHTML = 'Hide Fretboard';
+    shown = true;
+  }
 })
 function resetBars() {
   setTimeout(() => {
